@@ -1,0 +1,179 @@
+/* src/App.css */
+
+/* Basic Reset & Body Defaults */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f7f6; /* Light grey background */
+  color: #333;
+}
+
+.App {
+  text-align: center;
+}
+
+/* Header Styling */
+.App-header {
+  background-color: #2c3e50; /* Dark blue-grey */
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+/* Main Content Area */
+main {
+  max-width: 1200px;
+  margin: 0 auto; /* Center the content */
+  padding: 15px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #e0e0e0; /* Light separator line */
+  margin: 30px 0;
+}
+
+/* Interest Selector Styling */
+.interest-selector {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.interest-selector h3 {
+  margin-top: 0;
+  color: #34495e; /* Darker blue */
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.interest-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Spacing between checkboxes */
+}
+
+.interest-options label {
+  display: inline-flex; /* Align checkbox and text */
+  align-items: center;
+  cursor: pointer;
+  background-color: #ecf0f1; /* Light grey background for tags */
+  padding: 5px 12px;
+  border-radius: 15px; /* Rounded corners */
+  transition: background-color 0.2s ease;
+}
+
+.interest-options label:hover {
+  background-color: #dde4e6;
+}
+
+.interest-options input[type="checkbox"] {
+  margin-right: 8px;
+  accent-color: #3498db; /* Blue checkmark */
+}
+
+/* Search Bar Styling */
+.search-bar {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 10px;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar select,
+.search-bar input[type="text"] {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.search-bar select {
+  min-width: 150px;
+}
+
+.search-bar input[type="text"] {
+  flex-grow: 1; /* Allow input to take available space */
+  min-width: 200px;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  background-color: #3498db; /* Blue */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.search-bar button:hover {
+  background-color: #2980b9; /* Darker blue */
+}
+
+/* Feed Display Area */
+.feed-display {
+  display: grid;
+  /* Responsive grid: 1 column on small screens, 2 on medium, 3 on large */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px; /* Spacing between cards */
+  margin-top: 20px;
+}
+
+/* Loading and No Results States */
+main > p {
+  /* Style direct <p> children of main for loading/error/no results */
+  font-size: 1.1rem;
+  color: #555;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer Styling */
+.App-footer {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #ecf0f1; /* Light grey */
+  color: #7f8c8d; /* Muted grey text */
+  font-size: 0.9rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Basic Responsive Adjustments */
+@media (max-width: 768px) {
+  .App-header h1 {
+    font-size: 2rem;
+  }
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch; /* Make elements full width on small screens */
+  }
+  .feed-display {
+    /* Ensure at least 300px, but allow shrinking */
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  }
+}

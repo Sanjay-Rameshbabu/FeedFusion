@@ -1,0 +1,440 @@
+/* src/components/PostCard.css */
+
+.post-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Keep content within rounded corners */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  text-align: left; /* Align text to the left */
+}
+
+.post-card:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Styles for the Media Area --- */
+.post-media-area {
+  width: 100%;
+  position: relative; /* Needed for absolute positioning */
+  background-color: #f0f0f0; /* Placeholder background */
+  line-height: 0; /* Prevent extra space below images/iframes */
+}
+
+/* Base styles for thumbnails and iframes for responsiveness */
+.post-media-area .post-thumbnail,
+.post-media-area .youtube-iframe {
+  display: block;
+  width: 100%;
+  border: none; /* Remove iframe border */
+  aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio by default */
+}
+
+.post-media-area .post-thumbnail {
+  object-fit: cover; /* Cover the area, cropping if needed */
+}
+
+/* Specific styles for Reddit thumbnails (might not be 16:9) */
+.post-thumbnail.reddit-thumbnail {
+  aspect-ratio: auto; /* Let the image determine its aspect ratio */
+  max-height: 300px; /* Example max height */
+  object-fit: contain; /* Show whole image, don't crop */
+  background-color: #e8e8e8; /* Lighter background for contain */
+}
+
+/* Placeholder for when no thumbnail is available */
+.thumbnail-placeholder {
+  aspect-ratio: 16 / 9; /* Maintain consistent height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 0.9rem;
+  background-color: #f5f5f5;
+}
+
+/* --- YouTube Specific Styles --- */
+.youtube-thumbnail-container {
+  position: relative; /* For overlay positioning */
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Match iframe aspect ratio */
+  overflow: hidden; /* Hide anything outside */
+  display: block; /* Ensure it takes space */
+  background-color: #000; /* Black background if image fails */
+}
+
+.youtube-thumbnail-container img {
+  /* Make image fill the container */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease; /* Optional: slight zoom on hover */
+}
+
+.youtube-thumbnail-container:hover img {
+  transform: scale(1.05); /* Optional: slight zoom effect */
+}
+
+/* Play Button Overlay */
+.play-button-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px; /* Size of the button */
+  height: 48px; /* Size of the button */
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 15%; /* Slightly rounded rectangle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  pointer-events: none; /* Allow clicks to pass through to container */
+  z-index: 1; /* Ensure it's above the image */
+}
+
+.play-button-overlay svg {
+  fill: rgba(255, 255, 255, 0.9);
+  width: 30px; /* Size of the play icon */
+  height: 30px;
+}
+
+.youtube-thumbnail-container:hover .play-button-overlay {
+  background-color: rgba(255, 0, 0, 0.8); /* YouTube red on hover */
+}
+
+/* YouTube Iframe specific styles */
+.youtube-iframe {
+  background-color: #000; /* Ensure black background */
+}
+
+/* --- Common Content Area Styles --- */
+.post-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Allow content to fill card height */
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  gap: 10px; /* Add gap between title and badge */
+}
+
+.post-title {
+  margin: 0;
+  font-size: 1.15rem; /* Slightly smaller title */
+  font-weight: 600;
+  flex-grow: 1;
+}
+
+.post-title a {
+  text-decoration: none;
+  color: #2c3e50;
+  transition: color 0.2s ease;
+}
+
+.post-title a:hover {
+  color: #3498db;
+}
+
+.platform-badge {
+  font-size: 0.7rem; /* Slightly smaller badge */
+  font-weight: bold;
+  padding: 3px 7px;
+  border-radius: 4px;
+  color: white;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.platform-badge.platform-reddit {
+  background-color: #ff4500;
+}
+
+.platform-badge.platform-youtube {
+  background-color: #ff0000;
+}
+
+.post-description {
+  font-size: 0.9rem; /* Slightly smaller description */
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  flex-grow: 1;
+  /* Limit description lines */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Show max 4 lines */
+  -webkit-box-orient: vertical;
+  word-break: break-word; /* Help break long words if needed */
+}
+
+.post-footer {
+  margin-top: auto; /* Push footer to bottom */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 10px;
+}
+
+.post-author {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
+}
+
+.post-timestamp {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+/* src/components/PostCard.module.css */
+/* Add these styles to your existing PostCard.css or create PostCard.module.css */
+
+.postCard {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  text-align: left;
+  position: relative; /* Needed for absolute positioning of bookmark button */
+}
+
+.postCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Media Area --- */
+.postMediaArea {
+  width: 100%;
+  position: relative;
+  background-color: #f0f0f0;
+  line-height: 0;
+}
+
+.postThumbnail,
+.youtubeIframe {
+  display: block;
+  width: 100%;
+  border: none;
+  aspect-ratio: 16 / 9;
+}
+
+.postThumbnail {
+  object-fit: cover;
+}
+
+.redditThumbnail {
+  aspect-ratio: auto;
+  max-height: 300px;
+  object-fit: contain;
+  background-color: #e8e8e8;
+}
+
+.thumbnailPlaceholder {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 0.9rem;
+  background-color: #f5f5f5;
+}
+
+/* --- YouTube Specific --- */
+.youtubeThumbnailContainer {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  display: block;
+  background-color: #000;
+}
+
+.youtubeThumbnailContainer img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.youtubeThumbnailContainer:hover img {
+  transform: scale(1.05);
+}
+
+.playButtonOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 48px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.playButtonOverlay svg {
+  fill: rgba(255, 255, 255, 0.9);
+  width: 30px;
+  height: 30px;
+}
+
+.youtubeThumbnailContainer:hover .playButtonOverlay {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.youtubeIframe {
+  background-color: #000;
+}
+
+/* --- Content Area --- */
+.postContent {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.postTitle {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  flex-grow: 1;
+  padding-right: 30px; /* Add padding to prevent overlap with bookmark button */
+}
+
+.postTitle a {
+  text-decoration: none;
+  color: #2c3e50;
+  transition: color 0.2s ease;
+}
+
+.postTitle a:hover {
+  color: #3498db;
+}
+
+.platformBadge {
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 3px 7px;
+  border-radius: 4px;
+  color: white;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.platformBadge.platformReddit {
+  background-color: #ff4500;
+}
+.platformBadge.platformYoutube {
+  background-color: #ff0000;
+}
+/* Add other platform colors */
+.platformBadge.platformUnknown {
+  background-color: #7f8c8d;
+}
+
+.postDescription {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  flex-grow: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+}
+
+.postFooter {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 10px;
+}
+
+.postAuthor {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 10px;
+}
+
+.postTimestamp {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.post-bottom-icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.bookmark-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #555;
+}
+
+.bookmark-button.bookmarked {
+  color: #f39c12; /* gold-ish */
+}
+
+.platform-icon {
+  font-size: 20px;
+}
+
+.youtube-icon {
+  color: #FF0000;
+}
+
+.reddit-icon {
+  color: #FF5700;
+}

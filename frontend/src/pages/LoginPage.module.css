@@ -1,0 +1,9 @@
+.pageContainer {
+  display: flex;
+  align-items: center; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
+  min-height: 100vh; /* Full viewport height */
+  background-color: #f3f4f6; /* Equivalent to bg-gray-100 */
+  padding: 1rem; /* Add some padding */
+}
+
